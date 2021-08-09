@@ -19,11 +19,11 @@ public class test {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-//		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
-//		WebDriver driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
+		WebDriver driver = new ChromeDriver();
 		
-		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
-		WebDriver driver = new  FirefoxDriver();
+// 		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
+// 		WebDriver driver = new  FirefoxDriver();
 		driver.manage().window().maximize();
 		
 		String sample = "https://www.testandquiz.com/selenium/testing.html";
@@ -200,7 +200,7 @@ public class test {
 	       
 	            catch(AssertionError e) {
 	          
-	        	      System.out.println("Male is unselected");
+	        	      System.out.println("Female is unselected");
 	                }
 	     
 	            try {
