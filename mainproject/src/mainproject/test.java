@@ -19,11 +19,11 @@ public class test {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
-		WebDriver driver = new ChromeDriver();
+//		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
+//		WebDriver driver = new ChromeDriver();
 		
-//		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
-//		WebDriver driver = new  FirefoxDriver();
+		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
+		WebDriver driver = new  FirefoxDriver();
 		driver.manage().window().maximize();
 		
 		String sample = "https://www.testandquiz.com/selenium/testing.html";
@@ -107,8 +107,8 @@ public class test {
 	   	         }
 	       
 	      btn.click();
-	      ActualData = "background: green;";
-		  ExpectedData = btn.getAttribute("style");
+	      ActualData = "Click me!!";
+		  ExpectedData = btn.getAttribute("title");
 //		  System.out.println(ExpectedData);
 		     
               try {
@@ -608,10 +608,8 @@ public class test {
 		       
 //		      ///drag and drop
 //		       
-//		      WebElement drag = driver.findElement(By.xpath("//*[@id=\"sourceImage\"]"));
-//		       
-//		      WebElement drop = driver.findElement(By.xpath("//*[@id=\"targetDiv\"]"));
-//		       
+//		      WebElement drag = driver.findElement(By.id("sourceImage"));		       
+//		      WebElement drop = driver.findElement(By.id("targetDiv"));
 //		      Actions wrk = new Actions(driver);
 //		      wrk.dragAndDrop(drag, drop).build().perform();
 //			  Thread.sleep(1000);
@@ -619,6 +617,8 @@ public class test {
 			  driver.quit();
 		
 	}
+
+
 
  
 }
