@@ -24,7 +24,7 @@ public class Logintest {
 		
 		///cookies accept
 		
-		WebElement cookies = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));
+		WebElement cookies = driver.findElement(By.xpath("//*[@id=\"onetrust-accept-btn-handler\"]"));
 //		driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 
 		Thread.sleep(1500);
