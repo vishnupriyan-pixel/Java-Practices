@@ -1,4 +1,8 @@
 
+package mainproject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -16,8 +20,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
+import com.gargoylesoftware.htmlunit.javascript.host.Set;
 
 import junit.framework.Assert;
 
@@ -27,9 +36,6 @@ import org.junit.runners.MethodSorters;
 @SuppressWarnings("unused")
 public class toolsTest {
 	static WebDriver driver;
-	
-//	mainproject.toolstest my = new toolstest();
-	
 	public WebElement xpath_locator(String ele) {
 
 		WebElement path= null;
@@ -516,7 +522,6 @@ public class toolsTest {
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
 			 drp.selectByIndex(0);
 			 driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-			 
 			 String drp5 = "5 rows";
 			 String drp51 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp5, drp51);
@@ -590,19 +595,23 @@ public class toolsTest {
 //			WebElement lnk1 = this.xpath_locator("//*[@id=\"simpleLink\"]");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //		    lnk1.click();
-//		    String lnk11 = "https://demoqa.com/";	
+//		    Thread.sleep(4000);
+//		    String lnk11 = "https://demoqa.com/";
 //		    assertEquals(lnk11, driver.getCurrentUrl());
 //			Thread.sleep(1000);
 //			driver.close();
 //			
-//			WebElement lnk2 = this.xpath_locator("/html/body/div[2]/div/div/div[2]/div[2]/div[1]/p[2]/a");
+//			WebElement lnk2 = this.css_locator("#dynamicLink");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //		    lnk2.click();
-//		    String lnk21 = "https://demoqa.com/";	
+//		    
+//		    Thread.sleep(4000);
+//		    String lnk21 = "https://demoqa.com/";
+//		    Thread.sleep(3000);
 //		    assertEquals(lnk21, driver.getCurrentUrl());
-//			Thread.sleep(1000);
-//			driver.close();
-			
+//		    Thread.sleep(1000);
+//		    driver.close();
+		    
 			WebElement api1 = this.xpath_locator("//*[@id=\"created\"]");
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 		    api1.click();
@@ -730,35 +739,88 @@ public class toolsTest {
 				}
 			Thread.sleep(1000);
 			
-			WebElement valid_lnk = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[1]");
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", valid_lnk);
-			valid_lnk.click();
-			String valid_lnk1 = "https://demoqa.com/";
-			assertEquals(valid_lnk1, driver.getCurrentUrl());
-			Thread.sleep(1000);
-			driver.navigate().back();  
+//			WebElement valid_lnk = this.xpath_locator("/html/body/div[2]/div/div/div[2]/div[2]/div[1]/a[1]");
+//			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+//			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", valid_lnk);
+//			valid_lnk.click();
+//			Thread.sleep(1300);
+//			String valid_lnk1 = "https://demoqa.com/";
+//			
+//			assertEquals(valid_lnk1, driver.getCurrentUrl());
+//			Thread.sleep(1000);
+//			driver.navigate().back();  
 			
-			WebElement brk_lnk = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[2]");
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brk_lnk);
-			brk_lnk.click();
-			String brk_lnk1 = "http://the-internet.herokuapp.com/status_codes/500";
-			assertEquals(brk_lnk1, driver.getCurrentUrl());
-			Thread.sleep(1000);
-//			String brk_lnk12 = "You have done a dynamic click";
-//			String brk_lnk13 = this.xpath_locator("//*[@id=\"dynamicClickMessage\"]").getText();
-//			assertEquals(brk_lnk12, brk_lnk12);
+//			WebElement brk_lnk = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[2]");
+//			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+//			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brk_lnk);
+//			brk_lnk.click();
+//			Thread.sleep(1000);
+//			String brk_lnk1 = "http://the-internet.herokuapp.com/status_codes/500";
+//			assertEquals(brk_lnk1, driver.getCurrentUrl());
+//			Thread.sleep(1000);
+//			String brk_lnk12 =   
+//				"This page returned a 500 status code."
+//				+ "\nFor a definition and common list of HTTP status codes, go here" ;
+//			String brk_lnk13 = this.xpath_locator("//*[@id=\"content\"]/div/p").getText();
+//			assertEquals(brk_lnk12, brk_lnk13);
 //			
 //			driver.navigate().back();  
 			
         }
         
+        //upload and download
+        
+        @Test
+        public void up_download() throws InterruptedException, IOException {
+        	WebElement up = this.xpath_locator("//*[@id=\"item-7\"]");
+        	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", up);
+			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		    up.click();
+		    String up1 = "https://demoqa.com/upload-download";
+			assertEquals(up1, driver.getCurrentUrl());
+			Thread.sleep(1000);
+			
+			WebElement dwn = this.xpath_locator("//*[@id=\"downloadButton\"]");
+			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		    dwn.click();
+		    String dwn1 = "sampleFile.jpeg";
+			assertEquals(dwn1, dwn.getAttribute("download"));
+			Thread.sleep(1000);
+		
+			WebElement up11  = this.xpath_locator("//*[@id=\"uploadFile\"]");
+			up11.sendKeys("/home/zoho/Pictures/nature.jpg");
+			assertEquals("C:\\fakepath\\nature.jpg",up11.getAttribute("value"));	
+			Thread.sleep(1000);
+			
+        }
+        
+        ///dynamicProperties
+        
+        @Test
+        public void dynamic_properties() throws InterruptedException {
+        	WebElement prop = this.xpath_locator("//*[@id=\"item-8\"]");
+        	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", prop);
+			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		    prop.click();
+		    String prop1 = "https://demoqa.com/dynamic-properties";
+	            assertEquals(prop1, driver.getCurrentUrl());
+		    Thread.sleep(5000);
+			
+		    WebElement prop2 = this.xpath_locator("//*[@id=\"visibleAfter\"]");
+	            driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		    String prop21 = "Visible After 5 Seconds";
+		    assertEquals(prop21, prop2.getText());
+		    Thread.sleep(1000);
+	            WebElement prop3 = driver.findElement(By.className("text-danger"));
+		    String prop31 = "rgba(220, 53, 69, 1)";
+	            assertEquals(prop31, prop3.getCssValue("color"));
+        }
         
         
-	    @After
+	    @AfterAll
 	
-	        public void clse() {
+	        public static void clse() {
 	    	driver.quit();
 	    }
 }
+
