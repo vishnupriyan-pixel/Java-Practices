@@ -1,15 +1,17 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -23,8 +25,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
 
 import junit.framework.Assert;
 
@@ -33,7 +33,7 @@ import org.junit.runners.MethodSorters;
 
 @SuppressWarnings("unused")
 public class toolsTest {
-	static WebDriver driver;
+	public static WebDriver driver;
 	public WebElement xpath_locator(String ele) {
 
 		WebElement path= null;
@@ -108,16 +108,22 @@ public class toolsTest {
 	
 	///Text Box
 	@Test
-	
 	public  void txtBox() throws InterruptedException {
 			
 			WebElement txt1 = this.xpath_locator("//*[@id=\"item-0\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			txt1.click();
-			
 			String act = "https://demoqa.com/text-box";
 			assertEquals(act,driver.getCurrentUrl());
-		
+			
+			WebElement sub1 = this.xpath_locator("//*[@id=\"submit\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", sub1);
+			sub1.click();
+			String sub2 = "button";
+			assertEquals(sub2, sub1.getAttribute("type"));
+			Thread.sleep(1000);
+			driver.navigate().refresh();
 		        
 			WebElement txt2 = this.xpath_locator("//*[@id=\"userName\"]");
 			txt2.click();
@@ -145,12 +151,12 @@ public class toolsTest {
 			assertEquals(act4, txt5.getAttribute("value"));
 			Thread.sleep(1000);
 			
-			WebElement sub1 = this.xpath_locator("//*[@id=\"submit\"]");
+			sub1 = this.xpath_locator("//*[@id=\"submit\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", sub1);
 			sub1.click();
-			String sub2 = "button";
-			assertEquals(sub2, sub1.getAttribute("type"));
+			String sub21 = "button";
+			assertEquals(sub21, sub1.getAttribute("type"));
 			Thread.sleep(1000);
 			
 		}	
@@ -225,7 +231,6 @@ public class toolsTest {
 	
 		///radio_button
 		@Test
-		
 		public void radio1() throws InterruptedException {
 			WebElement rd1 = this.xpath_locator("//*[@id=\"item-2\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -296,12 +301,22 @@ public class toolsTest {
 			String addbtn = "button";
 			assertEquals(addbtn, wet1.getAttribute("type"));
 			
+			WebElement sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
+			
 			WebElement inpt = this.xpath_locator("//*[@id=\"firstName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt.click();
 			inpt.sendKeys("Vishnu");
 			String inpt12 = "Vishnu";
 			assertEquals(inpt12, inpt.getAttribute("value"));
+			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
 			
 			WebElement inpt2 = this.xpath_locator("//*[@id=\"lastName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -310,41 +325,114 @@ public class toolsTest {
 			String inpt21 = "Priyan";
 			assertEquals(inpt21, inpt2.getAttribute("value"));
 			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
 			WebElement inpt3 = this.xpath_locator("//*[@id=\"userEmail\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt3.click();
-			inpt3.sendKeys("vishnu1234@gmail.com");
-			String inpt31 = "vishnu1234@gmail.com";
+			inpt3.sendKeys("vishnu1234");
+			String inpt31 = "vishnu1234";
 			assertEquals(inpt31, inpt3.getAttribute("value"));
+			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
 			
 			WebElement inpt4 = this.xpath_locator("//*[@id=\"age\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt4.click();
-			inpt4.sendKeys("23");
-			String inpt41 = "23";
+			inpt4.sendKeys("vv");
+			String inpt41 = "vv";
 			assertEquals(inpt41, inpt4.getAttribute("value"));
+			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
 			
 			WebElement inpt5 = this.xpath_locator("//*[@id=\"salary\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt5.click();
-			inpt5.sendKeys("15000");
-			String inpt51 = "15000";
+			inpt5.sendKeys("gdgyu");
+			String inpt51 = "gdgyu";
 			assertEquals(inpt51, inpt5.getAttribute("value"));
+			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(800);
 			
 			WebElement inpt6 = this.xpath_locator("//*[@id=\"department\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt6.click();
-			inpt6.sendKeys("Finance");
-			String inpt61 = "Finance";
+			inpt6.sendKeys("76748494");
+			String inpt61 = "76748494";
 			assertEquals(inpt61, inpt6.getAttribute("value"));
 			
-			WebElement sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			inpt = this.xpath_locator("//*[@id=\"firstName\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt.click();
+			inpt.clear();
+			inpt.sendKeys("Vishnu");
+			String inpt13 = "Vishnu";
+			assertEquals(inpt13, inpt.getAttribute("value"));
+			Thread.sleep(800);
+			
+			inpt2 = this.xpath_locator("//*[@id=\"lastName\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt2.click();
+			inpt2.clear();
+			inpt2.sendKeys("Priyan");
+			String inpt22 = "Priyan";
+			assertEquals(inpt22, inpt2.getAttribute("value"));
+			Thread.sleep(800);
+			
+			inpt3 = this.xpath_locator("//*[@id=\"userEmail\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt3.click();
+			inpt3.clear();
+			inpt3.sendKeys("vishnu1234@gmail.com");
+			String inpt32 = "vishnu1234@gmail.com";
+			assertEquals(inpt32, inpt3.getAttribute("value"));
+			Thread.sleep(800);
+			
+			inpt4 = this.xpath_locator("//*[@id=\"age\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt4.click();
+			inpt4.clear();
+			inpt4.sendKeys("23");
+			String inpt42 = "23";
+			assertEquals(inpt42, inpt4.getAttribute("value"));
+			Thread.sleep(800);
+			
+			inpt5 = this.xpath_locator("//*[@id=\"salary\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt5.click();
+			inpt5.clear();
+			inpt5.sendKeys("15000");
+			String inpt52 = "15000";
+			assertEquals(inpt52, inpt5.getAttribute("value"));
+			Thread.sleep(800);
+			
+			inpt6 = this.xpath_locator("//*[@id=\"department\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt6.click();
+			inpt6.clear();
+			inpt6.sendKeys("Finance");
+			String inpt62 = "Finance";
+			assertEquals(inpt62, inpt6.getAttribute("value"));
+			Thread.sleep(800);
+			
+			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			sbtn2.click();
 //			String sbtn21 = "submit";
 //			assertEquals(sbtn21, sbtn2.getAttribute("type"));
 //			Thread.sleep(1000);
-			Thread.sleep(800);
+			Thread.sleep(1000);
 			
 			wet1.click();
 			WebElement inp_n = this.xpath_locator("//*[@id=\"firstName\"]");
@@ -352,7 +440,7 @@ public class toolsTest {
 			inp_n.click();
 			inp_n.sendKeys("4748949");
 			String ActualData = "4748949";	
-		    String ExpectedData = "ram";
+		        String ExpectedData = "ram";
 		    
 		    try {
     	        Assert.assertEquals(ActualData, ExpectedData);
@@ -379,10 +467,10 @@ public class toolsTest {
     	        System.out.println("\nInvalid Last name.Must be in letters");
             }
 		    
-		    WebElement inp_n2 = this.xpath_locator("//*[@id=\"userEmail\"]");
+		        WebElement inp_n2 = this.xpath_locator("//*[@id=\"userEmail\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inp_n2.click();
-		    inp_n2.sendKeys("ramkumar1234@gmail.com");
+		        inp_n2.sendKeys("ramkumar1234@gmail.com");
 			String ast = "ramkumar1234@gmail.com";
 			assertEquals(ast, inp_n2.getAttribute("value"));
 			
@@ -417,7 +505,7 @@ public class toolsTest {
     	        System.out.println("\nInvalid Department.Must be in letters");
             }
 			
-		    WebElement sbtn3 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+		        WebElement sbtn3 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			sbtn3.submit();
 			Thread.sleep(800);
@@ -453,7 +541,7 @@ public class toolsTest {
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			edt2.click();
 			edt2.clear();
-            edt2.sendKeys(Keys.BACK_SPACE);
+                        edt2.sendKeys(Keys.BACK_SPACE);
 			edt2.sendKeys("20000");
 			String edt21 = "text";
 			assertEquals(edt21, edt2.getAttribute("type"));
@@ -593,22 +681,36 @@ public class toolsTest {
 //			WebElement lnk1 = this.xpath_locator("//*[@id=\"simpleLink\"]");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //		    lnk1.click();
-//		    Thread.sleep(4000);
-//		    String lnk11 = "https://demoqa.com/";
-//		    assertEquals(lnk11, driver.getCurrentUrl());
-//			Thread.sleep(1000);
+//		    Thread.sleep(3000);
+//			String mainW = driver.getWindowHandle();
+//	        Set<String> mainW1 = driver.getWindowHandles();
+//	        Iterator<String> iterator = mainW1.iterator();
+//
+//	        while (iterator.hasNext()) {
+//	            String wdw_child = iterator.next();
+//	                if (!mainW.equalsIgnoreCase(wdw_child)) {
+//	                driver.switchTo().window(wdw_child);            
+//	            }
+//	        }
 //			driver.close();
-//			
-//			WebElement lnk2 = this.css_locator("#dynamicLink");
+//			Thread.sleep(1000);	
+			
+//			WebElement lnk2 = this.xpath_locator("//*[@id=\"dynamicLink\"]");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //		    lnk2.click();
-//		    
-//		    Thread.sleep(4000);
-//		    String lnk21 = "https://demoqa.com/";
 //		    Thread.sleep(3000);
-//		    assertEquals(lnk21, driver.getCurrentUrl());
-//		    Thread.sleep(1000);
-//		    driver.close();
+//		    String mainW2 = driver.getWindowHandle();
+//	        Set<String> mainW21 = driver.getWindowHandles();
+//	        Iterator<String> iterator1 = mainW21.iterator();
+//
+//	        while (iterator1.hasNext()) {
+//	            String wdw_child1 = iterator1.next();
+//	                if (!mainW2.equalsIgnoreCase(wdw_child1)) {
+//	                driver.switchTo().window(wdw_child1);            
+//	            }
+//	        }
+//			driver.close();
+//			Thread.sleep(1000);
 		    
 			WebElement api1 = this.xpath_locator("//*[@id=\"created\"]");
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
@@ -742,7 +844,7 @@ public class toolsTest {
 //			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", valid_lnk);
 //			valid_lnk.click();
 //			Thread.sleep(1300);
-//			String valid_lnk1 = "https://demoqa.com/";
+//			String valid_lnk1 = "http://demoqa.com/";
 //			
 //			assertEquals(valid_lnk1, driver.getCurrentUrl());
 //			Thread.sleep(1000);
@@ -795,30 +897,30 @@ public class toolsTest {
         ///dynamicProperties
         
         @Test
+        
         public void dynamic_properties() throws InterruptedException {
         	WebElement prop = this.xpath_locator("//*[@id=\"item-8\"]");
         	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", prop);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 		    prop.click();
 		    String prop1 = "https://demoqa.com/dynamic-properties";
-	            assertEquals(prop1, driver.getCurrentUrl());
-		    Thread.sleep(5000);
+			assertEquals(prop1, driver.getCurrentUrl());
+			Thread.sleep(5000);
 			
-		    WebElement prop2 = this.xpath_locator("//*[@id=\"visibleAfter\"]");
-	            driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    String prop21 = "Visible After 5 Seconds";
-		    assertEquals(prop21, prop2.getText());
-		    Thread.sleep(1000);
-	            WebElement prop3 = driver.findElement(By.className("text-danger"));
-		    String prop31 = "rgba(220, 53, 69, 1)";
-	            assertEquals(prop31, prop3.getCssValue("color"));
+			WebElement prop2 = this.xpath_locator("//*[@id=\"visibleAfter\"]");
+			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		        String prop21 = "Visible After 5 Seconds";
+			assertEquals(prop21, prop2.getText());
+			Thread.sleep(1000);
+			WebElement prop3 = driver.findElement(By.className("text-danger"));
+			String prop31 = "rgba(220, 53, 69, 1)";
+			assertEquals(prop31, prop3.getCssValue("color"));
+			driver.close();
         }
-        
-        
+          
 	    @AfterAll
 	
-	        public static void clse() {
+	        public void clse() {
 	    	driver.quit();
 	    }
 }
-
