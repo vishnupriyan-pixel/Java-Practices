@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -85,9 +87,9 @@ public class toolsTest {
 		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
 		driver = new ChromeDriver();
 //		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
-//		WebDriver driver = new  FirefoxDriver();
-		
-        driver.manage().window().maximize();
+//		WebDriver driver = new  FirefoxDriver();		
+//		driver.manage().window().setSize(new Dimension(600, 720));
+		driver.manage().window().maximize();
 		
 		String link = "https://demoqa.com/elements";
 		
@@ -123,7 +125,7 @@ public class toolsTest {
 			String sub2 = "button";
 			assertEquals(sub2, sub1.getAttribute("type"));
 			Thread.sleep(1000);
-			driver.navigate().refresh();
+			
 		        
 			WebElement txt2 = this.xpath_locator("//*[@id=\"userName\"]");
 			txt2.click();
@@ -172,36 +174,37 @@ public class toolsTest {
 			String ckb1 = "https://demoqa.com/checkbox";
 			assertEquals(ckb1, driver.getCurrentUrl());
 			
-			WebElement chk2 = this.xpath_locator("//*[@id=\"tree-node\"]/div/button[1]");
+			WebElement chk2 = this.css_locator(".rct-option");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			chk2.click();
 			String ckb2 = "button";
 			assertEquals(ckb2,chk2.getAttribute("type"));
 			Thread.sleep(1000);
 			
-			WebElement chk3 = this.xpath_locator("/html/body/div[2]/div/div/div[2]/div[2]/div[1]/div[1]/ol/li/ol/li[2]/ol/li[1]/ol/li[2]/span/label/span[1]");
+			WebElement chk3 = this.xpath_locator("//label[@for='tree-node-angular']");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+//			WebElement chka = this.css_locator(chk3);
 			chk3.click();
-			boolean ckb3 = driver.findElement(By.cssSelector("#tree-node > ol > li > ol > li:nth-child(2) > ol > li:nth-child(1) > ol > li:nth-child(2) > span > label > span.rct-checkbox")).isDisplayed();
+			boolean ckb3 = this.xpath_locator("//label[@for='tree-node-angular']").isDisplayed();
 			boolean ckb4 = true;
 			assertEquals(ckb3,ckb4);
 			Thread.sleep(1000);
 			
-			WebElement chk4 = this.xpath_locator("//*[@id=\"tree-node\"]/div/button[2]");
+			WebElement chk4 = this.css_locator(".rct-option-collapse-all");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			chk4.click();
 			String ckb41 = "button";
 			assertEquals(ckb41,chk4.getAttribute("type"));
 			String ckb42 = "angular";
-			String ckb43 = this.xpath_locator("//*[@id=\"result\"]/span[2]").getText();
+			String ckb43 = this.css_locator(".text-success").getText();
 			assertEquals(ckb42, ckb43);
-			Thread.sleep(1400);
+			Thread.sleep(1000);
 			
 			
-			WebElement chk5 = this.xpath_locator("//*[@id=\"tree-node\"]/ol/li/span/label");
+			WebElement chk5 = this.xpath_locator("//label[@for='tree-node-home']");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			chk5.click();
-			boolean ckb51 = driver.findElement(By.cssSelector("#tree-node > ol > li > span > label")).isDisplayed();
+			boolean ckb51 = this.xpath_locator("//label[@for='tree-node-home']").isDisplayed();
 			boolean ckb52 = true;
 			assertEquals(ckb51,ckb52);
 			String ckb53 = "You have selected :\n" + 
@@ -239,7 +242,7 @@ public class toolsTest {
 			assertEquals(rbtn1, driver.getCurrentUrl());
 			
 			
-			WebElement rd2 = this.css_locator("#app > div > div > div.row > div.col-12.mt-4.col-md-6 > div:nth-child(1) > div:nth-child(2) > label");
+			WebElement rd2 = this.xpath_locator("//label[@for='yesRadio']");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			rd2.click();
 			String ybtn = "radio";
@@ -249,11 +252,11 @@ public class toolsTest {
 			boolean rd23 = true;
 			assertEquals(rd22,rd23);
 			String rd24 = "You have selected Yes";
-			String rd25 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/p").getText();
+			String rd25 = this.css_locator(".mt-3").getText();
 			assertEquals(rd24, rd25);
 			Thread.sleep(1000);
 			
-			WebElement rd3 = this.css_locator("#app > div > div > div.row > div.col-12.mt-4.col-md-6 > div:nth-child(1) > div:nth-child(3) > label");
+			WebElement rd3 = this.xpath_locator("//label[@for='impressiveRadio']");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			rd3.click();
 			String impbtn = "radio";
@@ -263,23 +266,17 @@ public class toolsTest {
 			boolean rd33 = true;
 			assertEquals(rd32,rd33);
 			String rd34 = "You have selected Impressive";
-			String rd35 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/p").getText();
+			String rd35 = this.css_locator(".mt-3").getText();
 			assertEquals(rd34, rd35);
 			Thread.sleep(1000);
 			
 			WebElement rd4 = this.xpath_locator("//*[@id=\"noRadio\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			
-				try {
-					if(rd4.isSelected()) {
+				if(rd4.isSelected()) {
 						System.out.println("radio button is enabled");
 					}
 					else {
 						System.out.println("radio button is not enabled");
-					}
-					}
-			   catch(AssertionError e){
-				   		System.out.println(e);
 					}
      	}
 		
@@ -301,76 +298,403 @@ public class toolsTest {
 			String addbtn = "button";
 			assertEquals(addbtn, wet1.getAttribute("type"));
 			
-			WebElement sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			/// Empty Check
+			
+			WebElement sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			sbtn2.click();
-			Thread.sleep(800);
+			Thread.sleep(300);
+			
+			WebElement inptem = this.css_locator("#firstName:invalid");
+			assertTrue(inptem.isDisplayed());
+			WebElement inptem1 = this.css_locator("#lastName:invalid");
+			assertTrue(inptem1.isDisplayed());
+			WebElement inptem2 = this.css_locator("#userEmail:invalid");
+			assertTrue(inptem2.isDisplayed());
+			WebElement inptem3 = this.css_locator("#age:invalid");
+			assertTrue(inptem3.isDisplayed());
+			WebElement inptem4 = this.css_locator("#salary:invalid");
+			assertTrue(inptem4.isDisplayed());
+			WebElement inptem5 = this.css_locator("#department:invalid");
+			assertTrue(inptem5.isDisplayed());
+			
+			/// Minimum Characters check 
 			
 			WebElement inpt = this.xpath_locator("//*[@id=\"firstName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt.click();
-			inpt.sendKeys("Vishnu");
-			String inpt12 = "Vishnu";
+			inpt.sendKeys("Vi");
+			Thread.sleep(300);
+			String inptbi2 = this.css_locator("#firstName:valid").getCssValue("border-color");
+			String inptbi21 = "rgb(40, 167, 69)";
+			assertEquals(inptbi2, inptbi21);
+			boolean min1 = this.css_locator("#firstName:valid").isDisplayed();
+			boolean min12 = true;
+			assertEquals(min1,min12);
+			String inpt12 = "Vi";
 			assertEquals(inpt12, inpt.getAttribute("value"));
-			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
-			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			sbtn2.click();
-			Thread.sleep(800);
+			Thread.sleep(500);
 			
 			WebElement inpt2 = this.xpath_locator("//*[@id=\"lastName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt2.click();
-			inpt2.sendKeys("Priyan");
-			String inpt21 = "Priyan";
-			assertEquals(inpt21, inpt2.getAttribute("value"));
+			inpt2.sendKeys("rg");
+			String min3 = "rg";
+			assertEquals(min3, inpt2.getAttribute("value"));
+			Thread.sleep(300);
+			String minv1 = this.css_locator("#lastName:valid").getCssValue("border-color");
+			String minv11 = "rgb(40, 167, 69)";
+			assertEquals(minv1, minv11);
 			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
-			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			sbtn2.click();
-			Thread.sleep(800);
+			boolean minv12 = this.css_locator("#lastName:valid").isDisplayed();
+			boolean minv13 = true;
+			assertEquals(minv12,minv13);
+			Thread.sleep(200);
+			
 			WebElement inpt3 = this.xpath_locator("//*[@id=\"userEmail\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt3.click();
-			inpt3.sendKeys("vishnu1234");
-			String inpt31 = "vishnu1234";
-			assertEquals(inpt31, inpt3.getAttribute("value"));
-			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
-			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			sbtn2.click();
-			Thread.sleep(800);
+			inpt3.sendKeys("tr");
+			String min4 = "tr";
+			assertEquals(min4, inpt3.getAttribute("value"));
+			Thread.sleep(300);
+			String minv2 = this.css_locator("#userEmail:invalid").getCssValue("border-color");
+			String minv21 = "rgb(220, 53, 69)";
+			assertEquals(minv2, minv21);
+			boolean minv22 = this.css_locator("#userEmail:invalid").isDisplayed();
+			boolean minv23 = true;
+			assertEquals(minv22,minv23);
+			Thread.sleep(200);
 			
 			WebElement inpt4 = this.xpath_locator("//*[@id=\"age\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt4.click();
-			inpt4.sendKeys("vv");
-			String inpt41 = "vv";
-			assertEquals(inpt41, inpt4.getAttribute("value"));
-			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
-			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			sbtn2.click();
-			Thread.sleep(800);
+			inpt4.sendKeys(".,");
+			String min5 = ".,";
+			assertEquals(min5, inpt4.getAttribute("value"));
+			Thread.sleep(300);
+			String minv3 = this.css_locator("#age:invalid").getCssValue("border-color");
+			String minv31 = "rgb(220, 53, 69)";
+			assertEquals(minv3, minv31);
+			boolean minv32 = this.css_locator("#age:invalid").isDisplayed();
+			boolean minv33 = true;
+			assertEquals(minv32,minv33);
+			Thread.sleep(200);
 			
 			WebElement inpt5 = this.xpath_locator("//*[@id=\"salary\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt5.click();
-			inpt5.sendKeys("gdgyu");
-			String inpt51 = "gdgyu";
-			assertEquals(inpt51, inpt5.getAttribute("value"));
-			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
-			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
-			sbtn2.click();
-			Thread.sleep(800);
+			inpt5.sendKeys("01");
+			String min6 = "01";
+			assertEquals(min6, inpt5.getAttribute("value"));
+			Thread.sleep(300);
+			String minv6 = this.css_locator("#salary:valid").getCssValue("border-color");
+			String minv61 = "rgb(40, 167, 69)";
+			assertEquals(minv6, minv61);
+			boolean minv62 = this.css_locator("#salary:valid").isDisplayed();
+			boolean minv63 = true;
+			assertEquals(minv62,minv63);
+			Thread.sleep(500);
 			
 			WebElement inpt6 = this.xpath_locator("//*[@id=\"department\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inpt6.click();
+			inpt6.sendKeys("rb");
+			String min7 = "rb";
+			assertEquals(min7, inpt6.getAttribute("value"));
+			Thread.sleep(300);
+			String minv7 = this.css_locator("#department:valid").getCssValue("border-color");
+			String minv71 = "rgb(40, 167, 69)";
+			assertEquals(minv7, minv71);
+			boolean minv72 = this.css_locator("#department:valid").isDisplayed();
+			boolean minv73 = true;
+			assertEquals(minv72,minv73);
+			Thread.sleep(500);
+			
+			/// Maximum Characters check
+			
+			inpt.click();
+			inpt.clear();
+			inpt.sendKeys("ereeuruwigffffffffffffffe");
+			String max1 = "ereeuruwigffffffffffffffe";
+			assertEquals(max1, inpt.getAttribute("value"));
+			
+			Thread.sleep(500);
+			String maxv1 = this.css_locator("#firstName:valid").getCssValue("border-color");
+			String maxv11 = "rgb(40, 167, 69)";
+			assertEquals(maxv1, maxv11);
+			
+			boolean maxv12 = this.css_locator("#firstName:valid").isDisplayed();
+			boolean maxv13= true;
+			assertEquals(maxv12,maxv13);
+			Thread.sleep(300);
+			
+			inpt2.click();
+			inpt2.clear();
+			inpt2.sendKeys("dhgauoworyufajhfryuwrrooi");
+			String max2 = "dhgauoworyufajhfryuwrrooi";
+			assertEquals(max2, inpt2.getAttribute("value"));
+			Thread.sleep(300);
+			String maxv2 = this.css_locator("#lastName:valid").getCssValue("border-color");
+			String maxv21 = "rgb(40, 167, 69)";
+			assertEquals(maxv2, maxv21);
+				
+			boolean max22 = this.css_locator("#lastName:valid").isDisplayed();
+			boolean max23 = true;
+			assertEquals(max22,max23);
+			Thread.sleep(200);
+			
+			inpt3.click();
+			inpt3.clear();
+			inpt3.sendKeys("dshgDHRIjkfig124dsgu94@.,/");
+			String max3 = "dshgDHRIjkfig124dsgu94@.,/";
+			assertEquals(max3, inpt3.getAttribute("value"));
+			Thread.sleep(300);
+			String maxv3 = this.css_locator("#userEmail:invalid").getCssValue("border-color");
+			String maxv31 = "rgb(220, 53, 69)";
+			assertEquals(maxv3, maxv31);
+			boolean maxv32 = this.css_locator("#userEmail:invalid").isDisplayed();
+			boolean maxv33 = true;
+			assertEquals(maxv32,maxv33);
+			Thread.sleep(200);
+			
+			inpt5.click();
+			inpt5.clear();
+			inpt5.sendKeys("2874494994");
+			String max4 = "2874494994";
+			assertEquals(max4, inpt5.getAttribute("value"));
+			Thread.sleep(300);
+			String maxv4 = this.css_locator("#salary:valid").getCssValue("border-color");
+			String maxv41 = "rgb(40, 167, 69)";
+			assertEquals(maxv4, maxv41);
+			boolean maxv42 = this.css_locator("#salary:valid").isDisplayed();
+			boolean maxv43 = true;
+			assertEquals(maxv42,maxv43);
+			Thread.sleep(500);
+			
+			inpt6.click();
+			inpt6.clear();
+			inpt6.sendKeys("ejgjdshfuisgiuritufvcbwtr");
+			String max5 = "ejgjdshfuisgiuritufvcbwtr";
+			assertEquals(max5, inpt6.getAttribute("value"));
+			Thread.sleep(300);
+			String maxv5 = this.css_locator("#department:valid").getCssValue("border-color");
+			String maxv51 = "rgb(40, 167, 69)";
+			assertEquals(maxv5, maxv51);
+			boolean maxv52 = this.css_locator("#department:valid").isDisplayed();
+			boolean maxv53 = true;
+			assertEquals(maxv52,maxv53);
+			Thread.sleep(500);
+			
+			///special characters check
+			
+			inpt.click();
+			inpt.clear();
+			inpt.sendKeys("!@#$%^&*()_-+={}[]|?/.<>,");
+			String spcl1 = "!@#$%^&*()_-+={}[]|?/.<>,";
+			assertEquals(spcl1, inpt.getAttribute("value"));
+			Thread.sleep(400);
+			
+			if(spcl1.contains("!@#$%^&*()_-+={}[]|?/.<>,")){
+				System.out.println("\nFirst Name should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nFirst Name contains only valid Charcters");
+			}
+			
+			inpt2.click();
+			inpt2.clear();
+			inpt2.sendKeys("!@#$%^&*()_-+={}[]|?/.<>,");
+			String spcl2 = "!@#$%^&*()_-+={}[]|?/.<>,";
+			assertEquals(spcl2, inpt2.getAttribute("value"));
+			Thread.sleep(400);
+			
+			if(spcl2.contains("!@#$%^&*()_-+={}[]|?/.<>,")){
+				System.out.println("\nLast Name should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nLast Name contains only valid Charcters");
+			}
+			
+			inpt3.click();
+			inpt3.clear();
+			inpt3.sendKeys("!@#$%^&*()_-+={}[]|?/.<>,");
+			String spcl3 = "!@#$%^&*()_-+={}[]|?/.<>,";
+			assertEquals(spcl3, inpt3.getAttribute("value"));
+			Thread.sleep(300);
+
+			if(spcl3.contains("!@#$%^&*()_-+={}[]|?/.<>,")){
+				System.out.println("\nEmail all charcters should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nEmail contains only valid format");
+			}
+			
+			inpt4.click();
+			inpt4.clear();
+			inpt4.sendKeys("@#");
+			String spcl4 = "@#";
+			assertEquals(spcl4, inpt4.getAttribute("value"));
+			Thread.sleep(300);
+			
+			if(spcl4.contains("@#")){
+				System.out.println("\nAge should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nAge contains only numbers");
+			}
+			
+			inpt5.click();
+			inpt5.clear();
+			inpt5.sendKeys("!@#$%^&*()");
+			String spcl5 = "!@#$%^&*()";
+			assertEquals(spcl5, inpt5.getAttribute("value"));
+			Thread.sleep(300);
+			
+			if(spcl5.contains("!@#$%^&*()")){
+				System.out.println("\nSalary should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nSalary contains only numbers");
+			}
+			
+			inpt6.click();
+			inpt6.clear();
+			inpt6.sendKeys("!@#$%^&*()_-+={}[]|?/.<>,");
+			String spcl6 = "!@#$%^&*()_-+={}[]|?/.<>,";
+			assertEquals(spcl6, inpt6.getAttribute("value"));
+			Thread.sleep(300);
+			
+			if(spcl6.contains("!@#$%^&*()_-+={}[]|?/.<>,")){
+				System.out.println("\nDepartment should not be Special Charcters");
+			}
+			else {
+				System.out.println("\nDepartment contains only Specified name");
+			}
+			
+			///Invalid check
+			
+			inpt = this.xpath_locator("//*[@id=\"firstName\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt.click();
+			inpt.clear();
+			inpt.sendKeys("Vishnu");
+			String inpt18 = "Vishnu";
+			assertEquals(inpt18, inpt.getAttribute("value"));
+			
+			Thread.sleep(500);
+			String inptbi = this.css_locator("#firstName:valid").getCssValue("border-color");
+			String inptbi1 = "rgb(40, 167, 69)";
+			assertEquals(inptbi, inptbi1);
+			
+			boolean inptv14 = this.css_locator("#firstName:valid").isDisplayed();
+			boolean inptv15 = true;
+			assertEquals(inptv14,inptv15);
+			Thread.sleep(200);
+			
+			
+			inpt2 = this.xpath_locator("//*[@id=\"lastName\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt2.click();
+			inpt2.clear();
+			inpt2.sendKeys("Priyan");
+			String inpt21 = "Priyan";
+			assertEquals(inpt21, inpt2.getAttribute("value"));
+			Thread.sleep(300);
+			String inptbi22 = this.css_locator("#lastName:valid").getCssValue("border-color");
+			String inptbi23 = "rgb(40, 167, 69)";
+			assertEquals(inptbi22, inptbi23);
+			
+			boolean inptl = this.css_locator("#lastName:valid").isDisplayed();
+			boolean inptl1 = true;
+			assertEquals(inptl,inptl1);
+			Thread.sleep(200);
+			
+			sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(200);
+			
+			inpt3 = this.xpath_locator("//*[@id=\"userEmail\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt3.click();
+			inpt3.clear();
+			inpt3.sendKeys("vishnu1234");
+			String inpt31 = "vishnu1234";
+			assertEquals(inpt31, inpt3.getAttribute("value"));
+			Thread.sleep(300);
+			String inptbi3 = this.css_locator("#userEmail:invalid").getCssValue("border-color");
+			String inptbi31 = "rgb(220, 53, 69)";
+			assertEquals(inptbi3, inptbi31);
+			boolean inptm = this.css_locator("#userEmail:invalid").isDisplayed();
+			boolean m1 = true;
+			assertEquals(inptm,m1);
+			Thread.sleep(200);
+			
+			sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(200);
+			
+			inpt4 = this.xpath_locator("//*[@id=\"age\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt4.click();
+			inpt4.clear();
+			inpt4.sendKeys("vv");
+			String inpt41 = "vv";
+			assertEquals(inpt41, inpt4.getAttribute("value"));
+			Thread.sleep(300);
+			String inptbi4 = this.css_locator("#age:invalid").getCssValue("border-color");
+			String inptbi41 = "rgb(220, 53, 69)";
+			assertEquals(inptbi4, inptbi41);
+			boolean inpta = this.css_locator("#age:invalid").isDisplayed();
+			boolean inpta1 = true;
+			assertEquals(inpta,inpta1);
+			Thread.sleep(200);
+			
+			sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(200);
+			
+			inpt5 = this.xpath_locator("//*[@id=\"salary\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt5.click();
+			inpt5.clear();
+			inpt5.sendKeys("gdgyu");
+			String inpt51 = "gdgyu";
+			assertEquals(inpt51, inpt5.getAttribute("value"));
+			Thread.sleep(300);
+			String inptbi5 = this.css_locator("#salary:invalid").getCssValue("border-color");
+			String inptbi51 = "rgb(220, 53, 69)";
+			assertEquals(inptbi5, inptbi51);
+			boolean inpts = this.css_locator("#salary:invalid").isDisplayed();
+			boolean inpts1 = true;
+			assertEquals(inpts,inpts1);
+			Thread.sleep(500);
+			
+			sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			sbtn2.click();
+			Thread.sleep(200);
+			
+			inpt6 = this.xpath_locator("//*[@id=\"department\"]");
+			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
+			inpt6.click();
+			inpt6.clear();
 			inpt6.sendKeys("76748494");
 			String inpt61 = "76748494";
 			assertEquals(inpt61, inpt6.getAttribute("value"));
+			Thread.sleep(300);
+			String inptbi6 = this.css_locator("#department:valid").getCssValue("border-color");
+			String inptbi61 = "rgb(40, 167, 69)";
+			assertEquals(inptbi6, inptbi61);
+			boolean inptd = this.css_locator("#department:valid").isDisplayed();
+			boolean inptd1 = true;
+			assertEquals(inptl,inptl1);
+			Thread.sleep(500);
+			
+			///Valid check
 			
 			inpt = this.xpath_locator("//*[@id=\"firstName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -379,7 +703,14 @@ public class toolsTest {
 			inpt.sendKeys("Vishnu");
 			String inpt13 = "Vishnu";
 			assertEquals(inpt13, inpt.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv= this.css_locator("#firstName:valid").getCssValue("border-color");
+			String inptv1 = "rgb(40, 167, 69)";
+			assertEquals(inptv, inptv1);
+			boolean inptf = this.css_locator("#firstName:valid").isDisplayed();
+			boolean inptf1 = true;
+			assertEquals(inptf,inptf1);
+			Thread.sleep(500);
 			
 			inpt2 = this.xpath_locator("//*[@id=\"lastName\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -388,7 +719,14 @@ public class toolsTest {
 			inpt2.sendKeys("Priyan");
 			String inpt22 = "Priyan";
 			assertEquals(inpt22, inpt2.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv2= this.css_locator("#lastName:valid").getCssValue("border-color");
+			String inptv21 = "rgb(40, 167, 69)";
+			assertEquals(inptv2, inptv21);
+			boolean inptl2 = this.css_locator("#lastName:valid").isDisplayed();
+			boolean inptl3 = true;
+			assertEquals(inptl2,inptl3);
+			Thread.sleep(200);
 			
 			inpt3 = this.xpath_locator("//*[@id=\"userEmail\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -397,7 +735,14 @@ public class toolsTest {
 			inpt3.sendKeys("vishnu1234@gmail.com");
 			String inpt32 = "vishnu1234@gmail.com";
 			assertEquals(inpt32, inpt3.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv3= this.css_locator("#userEmail:valid").getCssValue("border-color");
+			String inptv31 = "rgb(40, 167, 69)";
+			assertEquals(inptv3, inptv31);
+			boolean inptm2 = this.css_locator("#userEmail:valid").isDisplayed();
+			boolean inptm3 = true;
+			assertEquals(inptm2,inptm3);
+			Thread.sleep(200);
 			
 			inpt4 = this.xpath_locator("//*[@id=\"age\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -406,7 +751,14 @@ public class toolsTest {
 			inpt4.sendKeys("23");
 			String inpt42 = "23";
 			assertEquals(inpt42, inpt4.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv4= this.css_locator("#age:valid").getCssValue("border-color");
+			String inptv41 = "rgb(40, 167, 69)";
+			assertEquals(inptv4, inptv41);
+			boolean inpta2 = this.css_locator("#age:valid").isDisplayed();
+			boolean inpta3 = true;
+			assertEquals(inpta2,inpta3);
+			Thread.sleep(200);
 			
 			inpt5 = this.xpath_locator("//*[@id=\"salary\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -415,7 +767,14 @@ public class toolsTest {
 			inpt5.sendKeys("15000");
 			String inpt52 = "15000";
 			assertEquals(inpt52, inpt5.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv5= this.css_locator("#salary:valid").getCssValue("border-color");
+			String inptv51 = "rgb(40, 167, 69)";
+			assertEquals(inptv5, inptv51);
+			boolean inpts2 = this.css_locator("#salary:valid").isDisplayed();
+			boolean inpts3 = true;
+			assertEquals(inpts2,inpts3);
+			Thread.sleep(200);
 			
 			inpt6 = this.xpath_locator("//*[@id=\"department\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
@@ -424,15 +783,22 @@ public class toolsTest {
 			inpt6.sendKeys("Finance");
 			String inpt62 = "Finance";
 			assertEquals(inpt62, inpt6.getAttribute("value"));
-			Thread.sleep(800);
+			Thread.sleep(300);
+			String inptv6= this.css_locator("#department:valid").getCssValue("border-color");
+			String inptv61 = "rgb(40, 167, 69)";
+			assertEquals(inptv6, inptv61);
+			boolean inptd2 = this.css_locator("#department:valid").isDisplayed();
+			boolean inptd3 = true;
+			assertEquals(inptd2,inptd3);
+			Thread.sleep(200);
 			
-			sbtn2 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+			sbtn2 = this.xpath_locator("//*[@id=\"submit\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			sbtn2.click();
-//			String sbtn21 = "submit";
-//			assertEquals(sbtn21, sbtn2.getAttribute("type"));
-//			Thread.sleep(1000);
+			String sbtn21 = "submit";
+			assertEquals(sbtn21, sbtn2.getAttribute("type"));
 			Thread.sleep(1000);
+			Thread.sleep(200);
 			
 			wet1.click();
 			WebElement inp_n = this.xpath_locator("//*[@id=\"firstName\"]");
@@ -467,10 +833,10 @@ public class toolsTest {
     	        System.out.println("\nInvalid Last name.Must be in letters");
             }
 		    
-		        WebElement inp_n2 = this.xpath_locator("//*[@id=\"userEmail\"]");
+		    WebElement inp_n2 = this.xpath_locator("//*[@id=\"userEmail\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			inp_n2.click();
-		        inp_n2.sendKeys("ramkumar1234@gmail.com");
+		    inp_n2.sendKeys("ramkumar1234@gmail.com");
 			String ast = "ramkumar1234@gmail.com";
 			assertEquals(ast, inp_n2.getAttribute("value"));
 			
@@ -505,7 +871,7 @@ public class toolsTest {
     	        System.out.println("\nInvalid Department.Must be in letters");
             }
 			
-		        WebElement sbtn3 = this.xpath_locator("/html/body/div[4]/div/div/div[2]/form/div[7]/div/button");
+		    WebElement sbtn3 = this.xpath_locator("//*[@id=\"submit\"]");
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			sbtn3.submit();
 			Thread.sleep(800);
@@ -532,7 +898,7 @@ public class toolsTest {
 			driver.manage().timeouts().implicitlyWait(1000,TimeUnit.MILLISECONDS);
 			edt.click();
 
-			boolean edbt = this.xpath_locator("/html/body/div[4]/div/div").isDisplayed();
+			boolean edbt = this.css_locator("#edit-record-1").isDisplayed();
 			boolean edbt1 = true;
 			assertEquals(edbt, edbt1);
 			Thread.sleep(1000);
@@ -554,14 +920,14 @@ public class toolsTest {
 			assertEquals(sbdt41, sbdt4.getAttribute("type"));
 //			Thread.sleep(1000);
 			
-			 Select drp = new Select(this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select"));
+			 Select drp = new Select(this.xpath_locator("//select[@aria-label='rows per page']"));
 			 drp.selectByVisibleText("10 rows");
 			 driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-			 boolean drpcon = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[2]").isSelected();
+			 boolean drpcon = this.xpath_locator("//option[@value='10']").isSelected();
 			 boolean drpcon1 = true;
 			 assertEquals(drpcon, drpcon1);
 			 Thread.sleep(1000);
-			 WebElement row_page = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select");
+			 WebElement row_page = this.xpath_locator("//select[@aria-label='rows per page']");
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
 			 drp.selectByIndex(2);
 			 driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
@@ -570,7 +936,7 @@ public class toolsTest {
 			 String drp11 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp1, drp11);
 			 Thread.sleep(1000);
-			 boolean drp12 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[3]").isSelected();
+			 boolean drp12 = this.xpath_locator("//option[@value='20']").isSelected();
 			 boolean drp13 = true;
 			 assertEquals(drp12, drp13);
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
@@ -581,7 +947,8 @@ public class toolsTest {
 			 String drp21 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp2, drp21);
 			 Thread.sleep(1000);
-			 boolean drp22 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[4]").isSelected();			 boolean drp23 = true;
+			 boolean drp22 = this.xpath_locator("//option[@value='25']").isSelected();			 
+			 boolean drp23 = true;
 			 assertEquals(drp22, drp23);
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
 			 drp.selectByIndex(4);
@@ -591,10 +958,10 @@ public class toolsTest {
 			 String drp31 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp3, drp31);
 			 Thread.sleep(1000);
-			 boolean drp32 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[5]").isSelected();
+			 boolean drp32 = this.xpath_locator("//option[@value='50']").isSelected();
 			 boolean drp33 = true;
 			 assertEquals(drp32, drp33);
-			 
+			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
 			 drp.selectByIndex(5);
 			 driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 			 
@@ -602,7 +969,7 @@ public class toolsTest {
 			 String drp41 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp4, drp41);
 			 Thread.sleep(1000);
-			 boolean drp42 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[6]").isSelected();
+			 boolean drp42 = this.xpath_locator("//option[@value='100']").isSelected();
 			 boolean drp43 = true;
 			 assertEquals(drp42, drp43);
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", row_page);
@@ -612,7 +979,7 @@ public class toolsTest {
 			 String drp51 = drp.getFirstSelectedOption().getText();
 			 assertEquals(drp5, drp51);
 			 Thread.sleep(1000);
-			 boolean drp52 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/div[3]/div[2]/div/div[2]/span[2]/select/option[1]").isSelected();
+			 boolean drp52 = this.xpath_locator("//option[@value='5']").isSelected();
 			 boolean drp53 = true;
 			 assertEquals(drp52, drp53);
 //			 Thread.sleep(1000);
@@ -620,7 +987,8 @@ public class toolsTest {
         
         ///buttons
         
-        @Test
+
+		@Test
         public void buttons() throws InterruptedException {
         	WebElement btt = this.xpath_locator("//*[@id=\"item-4\"]");
         	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btt);
@@ -653,12 +1021,12 @@ public class toolsTest {
 			assertEquals(rclk13, rclk.getAttribute("type"));
 //			Thread.sleep(1000);
 			
-			WebElement dclk = this.xpath_locator("/html/body/div[2]/div/div/div[2]/div[2]/div[1]/div[3]/button");
+			WebElement dclk = this.xpath_locator("//button[text()='Click Me']");
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 			dclk.click();
 //			Thread.sleep(1000);
 			String dclk1 = "You have done a dynamic click";
-			String dclk12 = this.xpath_locator("//*[@id=\"dynamicClickMessage\"]").getText();
+			String dclk12 = this.css_locator("#dynamicClickMessage").getText();
 			assertEquals(dclk1, dclk12);
 			String dclk13 = "button";
 			assertEquals(dclk13, dclk.getAttribute("type"));
@@ -714,8 +1082,8 @@ public class toolsTest {
 		    
 			WebElement api1 = this.xpath_locator("//*[@id=\"created\"]");
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api1.click();
-		    String api11 = "201";
+		        api1.click();
+		        String api11 = "201";
 			String api12 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api13 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api13);
@@ -727,8 +1095,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api2);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api2.click();
-		    String api21 = "204";
+		        api2.click();
+		        String api21 = "204";
 			String api22 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api23 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api23);
@@ -740,8 +1108,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api3);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api3.click();
-		    String api31 = "301";
+		        api3.click();
+		        String api31 = "301";
 			String api32 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api33 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api33);
@@ -753,8 +1121,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api4);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api4.click();
-		    String api41 = "400";
+		        api4.click();
+		        String api41 = "400";
 			String api42 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api43 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api43);
@@ -766,8 +1134,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api5);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api5.click();
-		    String api51 = "401";
+		        api5.click();
+		        String api51 = "401";
 			String api52 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api53 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api53);
@@ -779,8 +1147,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api6);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api6.click();
-		    String api61 = "403";
+		        api6.click();
+		        String api61 = "403";
 			String api62 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api63 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api63);
@@ -792,8 +1160,8 @@ public class toolsTest {
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api7);
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    api7.click();
-		    String api71 = "404";
+		        api7.click();
+		        String api71 = "404";
 			String api72 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 			WebElement api73 = this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]");
 			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", api73);
@@ -814,7 +1182,7 @@ public class toolsTest {
 			assertEquals(blnk_chk, driver.getCurrentUrl());
 			Thread.sleep(1000);
 	
-			WebElement img1 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/img[1]");
+			WebElement img1 = this.xpath_locator("//img[@src='/images/Toolsqa.jpg']");
 			Boolean img11 = (Boolean) ((JavascriptExecutor)driver) .executeScript("return arguments[0].complete " + "&& typeof arguments[0].naturalWidth != \"undefined\" " + "&& arguments[0].naturalWidth > 0", img1);
 
 				if (img11) {
@@ -824,22 +1192,19 @@ public class toolsTest {
 							System.out.println("Tools QA logo is not present");
 				     }
 				
-			WebElement img2 = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/img[2]");
+			WebElement img2 = this.xpath_locator("//img[@src='/images/Toolsqa_1.jpg']");
 			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-			try {
+	
 				if(img2.isSelected()) {
 					System.out.println("Image is enabled");
 				}
 				else {
 					System.out.println("\nImage is disabled");
 				}
-				}
-		   catch(AssertionError e){
-			   		System.out.println(e);
-				}
+				
 			Thread.sleep(1000);
 			
-//			WebElement valid_lnk = this.xpath_locator("/html/body/div[2]/div/div/div[2]/div[2]/div[1]/a[1]");
+//			WebElement valid_lnk = this.xpath_locator("//a[text()='Click Here for Valid Link']");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", valid_lnk);
 //			valid_lnk.click();
@@ -850,7 +1215,7 @@ public class toolsTest {
 //			Thread.sleep(1000);
 //			driver.navigate().back();  
 			
-//			WebElement brk_lnk = this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[2]");
+//			WebElement brk_lnk = this.xpath_locator("//a[text()='Click Here for Broken Link']");
 //			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
 //			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brk_lnk);
 //			brk_lnk.click();
@@ -874,23 +1239,23 @@ public class toolsTest {
         public void up_download() throws InterruptedException, IOException {
         	WebElement up = this.xpath_locator("//*[@id=\"item-7\"]");
         	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", up);
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    up.click();
-		    String up1 = "https://demoqa.com/upload-download";
-			assertEquals(up1, driver.getCurrentUrl());
-			Thread.sleep(1000);
+		driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		up.click();
+		String up1 = "https://demoqa.com/upload-download";
+		assertEquals(up1, driver.getCurrentUrl());
+		Thread.sleep(1000);
 			
-			WebElement dwn = this.xpath_locator("//*[@id=\"downloadButton\"]");
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    dwn.click();
-		    String dwn1 = "sampleFile.jpeg";
-			assertEquals(dwn1, dwn.getAttribute("download"));
-			Thread.sleep(1000);
+		WebElement dwn = this.xpath_locator("//*[@id=\"downloadButton\"]");
+		driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		dwn.click();
+		String dwn1 = "sampleFile.jpeg";
+		assertEquals(dwn1, dwn.getAttribute("download"));
+		Thread.sleep(1000);
 		
-			WebElement up11  = this.xpath_locator("//*[@id=\"uploadFile\"]");
-			up11.sendKeys("/home/zoho/Pictures/nature.jpg");
-			assertEquals("C:\\fakepath\\nature.jpg",up11.getAttribute("value"));	
-			Thread.sleep(1000);
+		WebElement up11  = this.xpath_locator("//*[@id=\"uploadFile\"]");
+		up11.sendKeys("/home/zoho/Pictures/nature.jpg");
+		assertEquals("C:\\fakepath\\nature.jpg",up11.getAttribute("value"));	
+		Thread.sleep(1000);
 			
         }
         
@@ -901,23 +1266,26 @@ public class toolsTest {
         public void dynamic_properties() throws InterruptedException {
         	WebElement prop = this.xpath_locator("//*[@id=\"item-8\"]");
         	((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", prop);
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		    prop.click();
-		    String prop1 = "https://demoqa.com/dynamic-properties";
-			assertEquals(prop1, driver.getCurrentUrl());
-			Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		prop.click();
+		String prop1 = "https://demoqa.com/dynamic-properties";
+		assertEquals(prop1, driver.getCurrentUrl());
+		Thread.sleep(5000);
 			
-			WebElement prop2 = this.xpath_locator("//*[@id=\"visibleAfter\"]");
-			driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
-		        String prop21 = "Visible After 5 Seconds";
-			assertEquals(prop21, prop2.getText());
-			Thread.sleep(1000);
-			WebElement prop3 = driver.findElement(By.className("text-danger"));
-			String prop31 = "rgba(220, 53, 69, 1)";
-			assertEquals(prop31, prop3.getCssValue("color"));
-			driver.close();
+		WebElement prop2 = this.xpath_locator("//*[@id=\"visibleAfter\"]");
+		driver.manage().timeouts().implicitlyWait(2000,TimeUnit.MILLISECONDS);
+		String prop21 = "Visible After 5 Seconds";
+		assertEquals(prop21, prop2.getText());
+		Thread.sleep(1000);
+		WebElement prop3 = driver.findElement(By.className("text-danger"));
+		String prop31 = "rgba(220, 53, 69, 1)";
+		assertEquals(prop31, prop3.getCssValue("color"));
+		driver.close();
         }
-          
+        
+      
+        
+        
 	    @AfterAll
 	
 	        public void clse() {
