@@ -22,6 +22,26 @@ class cypressTest
   {
     cy.visit("https://jqueryui.com/datepicker/")
   }
+
+  visit6()
+  {
+    cy.visit("https://jqueryui.com/dialog/")
+  }
+
+  visit7()
+  {
+    cy.visit("https://jqueryui.com/menu/")
+  }
+
+  visit8()
+  {
+    cy.visit("https://jqueryui.com/progressbar/")
+  }
+
+  visit9()
+  {
+    cy.visit("https://jqueryui.com/selectmenu/")
+  }
   chck_iframe()
   {
 
@@ -34,3 +54,4 @@ class cypressTest
 }
 
 export default cypressTest
+
