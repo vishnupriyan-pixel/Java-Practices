@@ -1,5 +1,6 @@
+
 import cypressTest from "./cypressTest";
-const { verify } = require("crypto");
+
 
 describe('AutoComplete',function(){
 
@@ -40,11 +41,14 @@ it('Visits Numbers_AutoComplete', ()=> {
     cy.get('iframe').then(($iframe)=>{
       const $input = $iframe.contents().find('body').find('div').find('input');
       let auto2 = cy.wrap($input)
-      auto2.clear();
-      auto2.type('JavaS');
+      auto2.clear()
+      .type('tywiuhivxouywop')
+      .clear()
+      auto2.type('JavaS')
       auto2.type('{downarrow}')
       auto2.type('{downarrow}')
-      auto2.type('{enter}');
+      // .wait(800)
+      .click()
       auto2.wait(1000)
       auto2.should('be.enabled')
       auto2.should($inputfield => expect($inputfield).to.be.visible)
@@ -705,7 +709,7 @@ describe('Controlgroup', function(){
 
 })
 
-describe('Visits Datepicker', function(){
+describe('Datepicker', function(){
   it('Visits jQuery Datepicker', function(){
     const rd = new cypressTest()
     rd.visit5()
@@ -818,3 +822,737 @@ describe('Visits Datepicker', function(){
     })
   })
 })
+
+describe('Dialog', function(){
+  it('Visits jQuery Dialog', function(){
+    const rd = new cypressTest()
+    rd.visit6()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits Dialog_box Presence', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $dialog = $iframe.contents().find('body')
+
+    let box1 = cy.wrap($dialog)
+    .find('.ui-draggable-handle')
+    .trigger('mousedown', { which: 1, pageX: 0, pageY: 100 })
+    .wait(800)
+    .trigger('mousemove', { which: 1, pageX: 100, pageY: 0 })
+    .wait(800)
+    .trigger('mousemove', { which: 1, pageX: 0, pageY: -200 })
+    .wait(800)
+    .trigger('mousemove', { which: 1, pageX: -400, pageY: -1000 })
+    .wait(800)
+    .trigger('mousemove', { which: 1, pageX: 100, pageY: 200 })
+    //  .trigger('mouseup')
+    .contains('span' ,'Basic dialog').should('be.visible')
+    .wait(1000)
+    let cancel = cy.wrap($dialog)
+    .find('.ui-dialog-titlebar-close').click({force: true})
+
+    let cont1 = cy.wrap($dialog)
+    .find('.ui-draggable').should('have.css', 'display', 'none')
+
+
+    })
+  })
+
+})
+
+describe('Visits Menu', function(){
+  it('Visits jQuery_Menu', function(){
+    const rd = new cypressTest()
+    rd.visit7()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits Menu_Lists1', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list1 = cy.wrap($menu)
+    list1.find('#menu>li:nth-child(1)')
+    .contains('li' , 'Toys (n/a)').should('have.css', 'opacity', '0.35')
+    })
+  })
+
+  it('Visits Menu_Lists2', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list2 = cy.wrap($menu)
+    list2.find('#menu>li:nth-child(2)',{timeout:1200}).trigger('mouseover')
+    .find('div' , 'books').should('have.css', 'color', 'rgb(255, 255, 255)')
+    })
+  })
+
+  it('Visits Menu_Lists3', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list3 = cy.wrap($menu)
+    list3.find('#menu>li:nth-child(3)',{timeout:1200}).trigger('mouseover')
+    .find('div' , 'Clothing').should('have.css', 'color', 'rgb(255, 255, 255)')
+    })
+  })
+
+  it('Visits Menu_Lists4', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list4 = cy.wrap($menu)
+    list4.find('#menu>li:nth-child(4)',{timeout:1200}).trigger('mouseover')
+    .find('div' , 'Electronics').should('have.css', 'color', 'rgb(255, 255, 255)')
+
+    let list41 = cy.wrap($menu)
+    list41.find('#menu>li:nth-child(4)>ul',{timeout:1200}).trigger('mouseover')
+    .find('li', 'Home Entertainment').should('have.css' , 'opacity', '0.35')
+    let list42 = cy.wrap($menu)
+    list42.find('#ui-id-6',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Car Hifi').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+    let list43 = cy.wrap($menu)
+    list43.find('#ui-id-7',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Utilities').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+    })
+  })
+
+  it('Visits Menu_Lists5', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list5 = cy.wrap($menu)
+    .find('#ui-id-8',{timeout:1200}).trigger('mouseover')
+    .contains('div', 'Movies').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+    })
+  })
+
+  it('Visits Menu_Lists6', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list6 = cy.wrap($menu)
+    list6.find('#menu>li:nth-child(6)',{timeout:800}).trigger('mouseover')
+    .find('div' , 'Music').should('have.css', 'color', 'rgb(255, 255, 255)')
+
+    let list61 = cy.wrap($menu)
+    list61.find('#ui-id-10',{timeout:1200}).trigger('mouseover')
+    .contains('div', 'Rock').should('have.css' , 'color', 'rgb(255, 255, 255)')
+    .click({force: true})
+
+    let list62 = cy.wrap($menu)
+    list62.find('#ui-id-11',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Alternative').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+     let list63 = cy.wrap($menu)
+    list63.find('#ui-id-12',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Classic').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+    let list64 = cy.wrap($menu)
+    list64.find('#ui-id-13',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Jazz').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+    let list65 = cy.wrap($menu)
+    list65.find('#ui-id-14',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Freejazz').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+    let list66 = cy.wrap($menu)
+    list66.find('#ui-id-15',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Big Band').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+    let list67 = cy.wrap($menu)
+    list67.find('#ui-id-16',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Modern').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+
+    let list68 = cy.wrap($menu)
+    list68.find('#ui-id-17',{timeout:1200}).trigger('mouseover')
+    .contains('div' , 'Pop').should('have.css', 'color', 'rgb(255, 255, 255)')
+    .click({force : true})
+    })
+  })
+
+  it('Visits Menu_Lists7', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $menu = $iframe.contents().find('body')
+    let list7 = cy.wrap($menu)
+    list7.find('#menu>li:nth-child(7)')
+    .contains('li' , 'Specials (n/a)').should('have.css', 'opacity', '0.35')
+    })
+  })
+
+})
+
+describe('Visits Progressbar', function(){
+  it('Visits jQuery_Progressbar', function(){
+    const rd = new cypressTest()
+    rd.visit8()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits Presence_of_Progressbar', function(){
+    const rd = new cypressTest()
+    rd.chck_iframe()
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $progress = $iframe.contents().find('body')
+    let prg = cy.wrap($progress)
+    .find('#progressbar').should('have.css', 'border', '1px solid rgb(197, 197, 197)')
+    .should('be.visible')
+
+    let prg1 = cy.wrap($progress)
+    .find('.ui-progressbar-value',{timeout:1200}).invoke('attr', 'style', 'width:90%')
+    .should('have.css', 'width', '380.6875px')
+    })
+  })
+})
+
+describe('Visits Selectmenu', function(){
+  it('Visits jQuery_Selectmenu', function(){
+    const rd = new cypressTest()
+    rd.visit9()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Selects a speed', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed').scrollIntoView()
+    .select('Medium', {force: true})
+    .should('contain.value', 'Medium')
+    })
+  })
+
+  it('Selects Slower_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed-button').click({force: true})
+    .type('{uparrow}')
+    .type('{uparrow}')
+    .wait(800)
+    .type('{enter}')
+    expect({ name: 'Slower' }).to.deep.equal({ name: 'Slower' })
+      })
+    })
+
+  it('Selects Slow_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    expect({ name: 'Slow' }).to.deep.equal({ name: 'Slow' })
+      })
+    })
+
+  it('Selects Medium_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    expect({ name: 'Medium' }).to.deep.equal({ name: 'Medium' })
+      })
+    })
+
+  it('Selects Fast_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    expect({ name: 'Fast' }).to.deep.equal({ name: 'Fast' })
+    })
+  })
+
+  it('Selects Faster_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#speed-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    expect({ name: 'Faster' }).to.deep.equal({ name: 'Faster' })
+
+    })
+  })
+
+  it('Select a file', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#files-button').scrollIntoView()
+    .click({force:true})
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-6')
+    .should('contain.text', 'jQuery.js')
+    })
+  })
+
+  it('Selects uiQuery_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+    cy.wrap($body)
+    .find('#files-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+
+    .should('have.attr', 'aria-activedescendant', 'ui-id-7')
+    })
+  })
+
+  it('Selects Some_unknown_file_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+    cy.wrap($body)
+    .find('#files-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+
+    .should('have.attr', 'aria-activedescendant', 'ui-id-8')
+    })
+  })
+
+  it('Selects Some_other_file_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+    cy.wrap($body)
+    .find('#files-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+
+    .should('have.attr', 'aria-activedescendant', 'ui-id-9')
+    })
+  })
+
+  it('Select a number', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').scrollIntoView()
+    .click({force:true})
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-11')
+    .should('contain.text', '2')
+
+    })
+  })
+
+  it('Selects num1_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{uparrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-10')
+    })
+  })
+
+  it('Selects num3_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-12')
+    })
+  })
+
+  it('Selects num4_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-13')
+    })
+  })
+
+  it('Selects num5_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-14')
+    })
+  })
+
+  it('Selects num6_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-15')
+    })
+  })
+
+  it('Selects num7_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-16')
+    })
+  })
+
+  it('Selects num8_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-17')
+    })
+  })
+
+  it('Selects num9_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-18')
+    })
+  })
+
+  it('Selects num10_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-19')
+    })
+  })
+
+  it('Selects num11_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-20')
+    })
+  })
+
+  it('Selects num12_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-21')
+    })
+  })
+
+  it('Selects num13_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-22')
+    })
+  })
+
+  it('Selects num14_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-23')
+    })
+  })
+
+  it('Selects num15_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-24')
+    })
+  })
+
+  it('Selects num16_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-25')
+    })
+  })
+
+  it('Selects num17_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-26')
+    })
+  })
+
+  it('Selects num18_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-27')
+    })
+  })
+
+  it('Selects num19_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#number-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-28')
+    })
+  })
+
+  it('Selects a title', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation').scrollIntoView().should('have.css', 'display', 'none')
+    .contains('Please pick one')
+    .should('contain.value', 'Please pick one')
+    })
+  })
+
+  it('Selects Mr._option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-30')
+
+    let title = cy.wrap($body)
+    title.find('.ui-selectmenu-text').should('contain.text','Mr.')
+    })
+  })
+
+  it('Selects Mrs._option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-31')
+
+    let title = cy.wrap($body)
+    title.find('.ui-selectmenu-text').should('contain.text','Mrs.')
+    })
+  })
+
+  it('Selects Dr._option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-32')
+
+    let title = cy.wrap($body)
+    title.find('.ui-selectmenu-text').should('contain.text','Dr.')
+    })
+  })
+
+  it('Selects Prof._option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-33')
+
+    let title = cy.wrap($body)
+    title.find('.ui-selectmenu-text').should('contain.text','Prof.')
+    })
+  })
+
+  it('Selects Other_option', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#salutation-button').click({force: true})
+    .type('{downarrow}')
+    .wait(800)
+    .type('{enter}')
+    .should('have.attr', 'aria-activedescendant', 'ui-id-34')
+
+    let title = cy.wrap($body)
+    title.find('.ui-selectmenu-text').should('contain.text','Other')
+    })
+  })
+})
+
