@@ -42,6 +42,27 @@ class cypressTest
   {
     cy.visit("https://jqueryui.com/selectmenu/")
   }
+
+  visit10()
+  {
+    cy.visit("https://jqueryui.com/slider/")
+  }
+
+  visit11()
+  {
+    cy.visit("https://jqueryui.com/spinner/")
+  }
+
+  visit12()
+  {
+    cy.visit("https://jqueryui.com/tabs/")
+  }
+
+  visit13()
+  {
+    cy.visit("https://jqueryui.com/tooltip/")
+  }
+
   chck_iframe()
   {
 
@@ -54,4 +75,5 @@ class cypressTest
 }
 
 export default cypressTest
+
 
