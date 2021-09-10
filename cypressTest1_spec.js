@@ -1,7 +1,6 @@
 
 import cypressTest from "./cypressTest";
 
-
 describe('AutoComplete',function(){
 
   it('Visits jQuery Autocomplete', function(){
@@ -193,6 +192,8 @@ it('Visits radio_button1', function(){
         .click({force: true})
         .should('be.checked')
 
+    let rd1 = cy.wrap($body)
+    rd1.find('.ui-checkboxradio-label').should('contain.text', 'New York')
     })
   })
 
@@ -206,6 +207,8 @@ it('Visits radio_button1', function(){
         .click({force: true})
         .should('be.checked')
 
+    let rd2 = cy.wrap($body)
+    rd2.find('.ui-checkboxradio-label').should('contain.text', 'Paris')
     })
   })
 
@@ -218,7 +221,8 @@ it('Visits radio_button1', function(){
         .find('#radio-3')
         .click({force: true})
         .should('be.checked')
-
+    let rd3 = cy.wrap($body)
+    rd3.find('.ui-checkboxradio-label').should('contain.text', 'London')
     })
   })
 
@@ -233,7 +237,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
-
+        let chk1 = cy.wrap($body)
+        chk1.find('.ui-checkboxradio-label').should('contain.text', '2 Star')
 
     })
   })
@@ -249,8 +254,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
-
-
+        let chk2 = cy.wrap($body)
+        chk2.find('.ui-checkboxradio-label').should('contain.text', '3 Star')
     })
 
   })
@@ -266,7 +271,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
-
+        let chk3 = cy.wrap($body)
+        chk3.find('.ui-checkboxradio-label').should('contain.text', '4 Star')
     })
   })
 
@@ -281,7 +287,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
-
+        let chk4 = cy.wrap($body)
+        chk4.find('.ui-checkboxradio-label').should('contain.text', '5 Star')
     })
   })
 
@@ -296,6 +303,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
+        let chkn1 = cy.wrap($body)
+        chkn1.find('.ui-checkboxradio-label').should('contain.text', '2 Double')
     })
   })
 
@@ -310,6 +319,8 @@ it('Visits radio_button1', function(){
         .not('be.checked')
         .check({force: true})
         .should('be.checked')
+        let chkn2 = cy.wrap($body)
+        chkn2.find('.ui-checkboxradio-label').should('contain.text', '2 Queen')
       })
     })
 
@@ -324,6 +335,8 @@ it('Visits radio_button1', function(){
           .not('be.checked')
           .check({force: true})
           .should('be.checked')
+          let chkn3 = cy.wrap($body)
+          chkn3.find('.ui-checkboxradio-label').should('contain.text', '1 Queen')
         })
 
       })
@@ -339,6 +352,8 @@ it('Visits radio_button1', function(){
             .not('be.checked')
             .check({force: true})
             .should('be.checked')
+            let chkn4 = cy.wrap($body)
+            chkn4.find('.ui-checkboxradio-label').should('contain.text', '1 King')
           })
 
         })
@@ -1213,7 +1228,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{uparrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-10')
     })
@@ -1228,7 +1242,6 @@ describe('Visits Selectmenu', function(){
     .find('#number-button').click({force: true})
     .type('{downarrow}')
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-12')
     })
@@ -1242,7 +1255,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-13')
     })
@@ -1256,7 +1268,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-14')
     })
@@ -1270,7 +1281,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-15')
     })
@@ -1284,7 +1294,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-16')
     })
@@ -1298,7 +1307,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-17')
     })
@@ -1312,7 +1320,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-18')
     })
@@ -1326,7 +1333,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-19')
     })
@@ -1340,7 +1346,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-20')
     })
@@ -1354,7 +1359,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-21')
     })
@@ -1368,7 +1372,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-22')
     })
@@ -1382,7 +1385,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-23')
     })
@@ -1396,7 +1398,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-24')
     })
@@ -1410,7 +1411,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-25')
     })
@@ -1424,7 +1424,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-26')
     })
@@ -1438,7 +1437,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-27')
     })
@@ -1452,7 +1450,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#number-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-28')
     })
@@ -1478,7 +1475,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#salutation-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-30')
 
@@ -1495,7 +1491,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#salutation-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-31')
 
@@ -1512,7 +1507,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#salutation-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-32')
 
@@ -1529,7 +1523,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#salutation-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-33')
 
@@ -1546,7 +1539,6 @@ describe('Visits Selectmenu', function(){
     cy.wrap($body)
     .find('#salutation-button').click({force: true})
     .type('{downarrow}')
-    .wait(800)
     .type('{enter}')
     .should('have.attr', 'aria-activedescendant', 'ui-id-34')
 
@@ -1555,4 +1547,314 @@ describe('Visits Selectmenu', function(){
     })
   })
 })
+
+describe('Visits Slider', function(){
+  it('Visits jQuery_Slider', function(){
+    const rd = new cypressTest()
+    rd.visit10()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Moves_the_slider_using_click', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#slider').click(200,0,{force:true}).should('have.css', 'border', '1px solid rgb(197, 197, 197)')
+    .should('be.visible')
+    })
+  })
+
+  it('Moves the slider using handler', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+      .find('.ui-slider-handle').invoke('attr', 'style', 'left : 90%')
+      .should('have.css', 'left', '380.688px')
+      .should('have.css', 'color', 'rgb(43, 43, 43)')
+    })
+  })
+})
+
+describe('Visits Spinner', function(){
+  it('Visits jQuery_Spinner', function(){
+    const rd = new cypressTest()
+    rd.visit11()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Empty_value check', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    // .find('#getvalue').click()
+    // cy.on('window:alert',(text)=>{
+    //   console.log(text);
+    //   cy.expect(text).to.contains('null')
+      Cypress.on("uncaught:exception", (err, runnable) => {
+
+        return false;
+      });
+
+      cy.on("window:alert", (str) => {
+
+        expect(str).to.equal("null");
+      cy.get('[id="getvalue"]').click();
+      });
+    });
+
+
+  })
+
+  it('Disable/Enable button', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    cy.wrap($body)
+    .find('#disable').click()
+
+    let dis1  = cy.wrap($body)
+    dis1.find('#spinner').should('have.attr','disabled')
+    .wait(1000)
+
+    let enb = cy.wrap($body)
+    enb.find('#disable').click()
+
+    let tw = cy.wrap($body)
+    tw.find('#destroy').click({force:true})
+
+    let dis2 = cy.wrap($body)
+    dis2.find('#spinner').should('not.have.attr', 'autocomplete', 'off')
+
+    let enb1 = cy.wrap($body)
+    enb1.find('#destroy').click({force:true})
+
+    let enb2 = cy.wrap($body)
+    enb2.find('#spinner').should('have.attr', 'role', 'spinbutton')
+    })
+  })
+
+  it('All_Checks_', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    let spl = cy.wrap($body)
+      spl.find('#spinner').click()
+      .type('@##$!%^&*!()_+')
+      .should('be.enabled')
+
+      let spl1 = cy.wrap($body)
+      Cypress.on("uncaught:exception", (err, runnable) => {
+
+        return false;
+      });
+
+      cy.on("window:alert", (str) => {
+
+        expect(str).to.equal("null");
+      cy.get('[id="getvalue"]').click();
+      });
+
+      let ltr = cy.wrap($body)
+      ltr.find('#spinner').click()
+      .clear()
+      .type('rdtfhAtfuieop')
+
+      let spl2 = cy.wrap($body)
+      Cypress.on("uncaught:exception", (err, runnable) => {
+
+        return false;
+      });
+
+      cy.on("window:alert", (str) => {
+
+        expect(str).to.equal("null");
+
+      cy.get('[id="getvalue"]').click();
+      });
+
+      let nums = cy.wrap($body)
+      nums.find('#spinner').click()
+      .clear()
+      .type('32')
+
+      let spl3 = cy.wrap($body)
+      Cypress.on("uncaught:exception", (err, runnable) => {
+
+        return false;
+      });
+
+      cy.on("window:alert", (str) => {
+
+        expect(str).to.equal("32");
+
+      cy.get('[id="getvalue"]').click();
+      expect({ name: '32' }).to.deep.equal({ name: '32' })
+      });
+
+
+      let nums1 = cy.wrap($body)
+      nums1.find('#spinner').click()
+      .type('{uparrow}')
+      .type('{uparrow}')
+      .type('{uparrow}')
+      .type('{uparrow}')
+
+      let spl4 = cy.wrap($body)
+      Cypress.on("uncaught:exception", (err, runnable) => {
+
+        return false;
+      });
+
+      cy.on("window:alert", (str) => {
+
+        expect(str).to.equal("36");
+
+      cy.get('[id="getvalue"]').click();
+      expect({ name: '36' }).to.deep.equal({ name: '36' })
+      });
+      let val2 = cy.wrap($body)
+      val2.find('#spinner').should('have.attr', 'aria-valuenow', '36')
+
+    })
+  })
+
+  it('Set Value to 5', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    let set_val = cy.wrap($body)
+    .find('#setvalue').click()
+
+    let val3 = cy.wrap($body)
+    .find('#spinner').should('have.attr', 'aria-valuenow', '5')
+
+    let set_val1 = cy.wrap($body)
+    .find('#spinner').click({force:true})
+    .type('{uparrow}')
+    .type('{uparrow}')
+    .type('{uparrow}')
+    .type('{uparrow}')
+    .type('{uparrow}')
+      .should('have.attr', 'aria-valuenow', '10')
+    })
+  })
+
+
+})
+
+describe('Visits Tabs', function(){
+  it('Visits jQuery_Tabs', function(){
+    const rd = new cypressTest()
+    rd.visit12()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits Tab1', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+     let tab1 = cy.wrap($body)
+     tab1.find('#ui-id-1').should('contain.text','Nunc tincidunt')
+     let tab11 = cy.wrap($body)
+     tab11.find('.ui-tabs-active').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+
+     let tab1_p = cy.wrap($body)
+     tab1_p.find('#tabs-1 > p').should('contain.text', 'Proin elit arcu')
+    })
+  })
+
+  it('Visits Tab2', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+     let tab2 = cy.wrap($body)
+     tab2.find('#ui-id-2').click({force:true})
+     .wait(300)
+     .should('contain.text','Proin dolor')
+     let tab21 = cy.wrap($body)
+     tab21.find('.ui-tabs-active').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+
+     let tab2_p = cy.wrap($body)
+     tab2_p.find('#tabs-2 > p').should('contain.text', 'Morbi tincidunt')
+    })
+  })
+
+  it('Visits Tab3', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+     let tab3 = cy.wrap($body)
+     tab3.find('#ui-id-3').click({force:true})
+     .wait(300)
+     .should('contain.text','Aenean lacinia')
+     let tab31 = cy.wrap($body)
+     tab31.find('.ui-tabs-active').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+
+     let tab3_p = cy.wrap($body)
+     tab3_p.find('#tabs-3 > p').should('contain.text', 'Mauris eleifend est et turpis')
+    })
+  })
+
+
+})
+
+describe('Visits Tooltip', function(){
+  it('Visits jQuery_Tooltip', function(){
+    const rd = new cypressTest()
+    rd.visit13()
+    cy.url().then(url => {
+    cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits links_Tooltip', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    let link1 = cy.wrap($body)
+    link1.find('p:nth-child(1) > a').should('have.attr', 'title', "That's what this widget is")
+    .trigger('mouseover').should('have.attr', 'aria-describedby' , 'ui-id-1')
+    .wait(800)
+    .click()
+
+    let link2 = cy.wrap($body)
+    link2.find('p:nth-child(2) > a').should('have.attr', 'title', "ThemeRoller: jQuery UI's theme builder application")
+    .trigger('mouseover').should('have.attr', 'aria-describedby' , 'ui-id-2')
+    .wait(800)
+    .click()
+    })
+  })
+
+  it('Visits inputbox_Tooltip', function(){
+    cy.get('.demo-frame')
+    .then(($iframe) => {
+    const $body = $iframe.contents().find('body')
+
+    let inp = cy.wrap($body)
+    inp.find('#age').should('have.attr', 'title', "We ask for your age only for statistical purposes.")
+    .trigger('mouseover').should('have.attr', 'aria-describedby' , 'ui-id-3')
+    .wait(800)
+    })
+  })
+})
+
 
