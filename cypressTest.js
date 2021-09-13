@@ -1,5 +1,9 @@
 class cypressTest
 {
+  visita()
+  {
+    cy.visit("https://jqueryui.com/accordion/")
+  }
   visit1()
   {
     cy.visit("https://jqueryui.com/autocomplete/")
