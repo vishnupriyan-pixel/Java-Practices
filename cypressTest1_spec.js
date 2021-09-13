@@ -1,5 +1,58 @@
 
 import cypressTest from "./cypressTest";
+describe('Accordian', function(){
+  it('Visits jQuery_Accordian', function(){
+    const acc1 = new cypressTest()
+    acc1.visita()
+    cy.url().then(url => {
+     cy.url().should('be.eq', url);
+    })
+  })
+
+  it('Visits Accordian1', function(){
+    cy.iframe().find('#ui-id-1')
+    .contains('Section 1').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+    .should('have.class', 'ui-state-active')
+
+    let accrd1 = cy.iframe()
+    accrd1.find('#ui-id-2').should('have.attr', 'style', 'display: block; height: 248px;')
+    .should('contain.text', 'Mauris mauris ante')
+
+  })
+
+  it('Visits Accordian2', function(){
+    cy.iframe().find('#ui-id-3').click().scrollIntoView()
+    .contains('Section 2').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+    .should('have.class', 'ui-state-active')
+
+    let accrd1 = cy.iframe()
+    accrd1.find('#ui-id-4').should('have.attr', 'style', 'display: block; height: 248px;')
+    .should('contain.text', 'Sed non urna')
+
+  })
+
+  it('Visits Accordian3', function(){
+    cy.iframe().find('#ui-id-5').click()
+    .contains('Section 3').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+    .should('have.class', 'ui-state-active')
+
+    let accrd1 = cy.iframe()
+    accrd1.find('#ui-id-6').should('have.attr', 'style', 'display: block; height: 248px;')
+    .should('contain.text', 'List item one')
+
+  })
+
+  it('Visits Accordian4', function(){
+    cy.iframe().find('#ui-id-7').click()
+    .contains('Section 4').should('have.css', 'background', 'rgb(0, 127, 255) none repeat scroll 0% 0% / auto padding-box border-box')
+    .should('have.class', 'ui-state-active')
+
+    let accrd1 = cy.iframe()
+    accrd1.find('#ui-id-8').should('have.attr', 'style', 'display: block; height: 248px;')
+    .should('contain.text', 'Suspendisse eu nisl')
+
+  })
+})
 
 describe('AutoComplete',function(){
 
