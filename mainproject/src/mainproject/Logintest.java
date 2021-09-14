@@ -12,7 +12,7 @@ public class Logintest {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver-new");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized");
 		WebDriver driver = new ChromeDriver(options);
