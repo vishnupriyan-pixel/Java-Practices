@@ -85,7 +85,7 @@ public class toolsTest {
 	    @BeforeClass
 		public static void url() {
 
-			System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver");
+			System.setProperty("webdriver.chrome.driver", "/home/zoho/Downloads/chromedriver-new");
 			driver = new ChromeDriver();
 	//		System.setProperty("webdriver.gecko.driver", "/home/zoho/Downloads/geckodriver");
 	//		WebDriver driver = new  FirefoxDriver();		
