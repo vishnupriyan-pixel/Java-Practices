@@ -1,4 +1,3 @@
-package mainproject;
 
 import static org.junit.Assert.*;
 import java.util.concurrent.TimeUnit;
@@ -118,7 +117,7 @@ public class ZaskFilters {
 		assertEquals(active_color, tags_active1);
 		Thread.sleep(1000);
 	}
-	@Ignore
+
 	////--------------------------Filter button with none applied-----------------------////
 	@Test
 	public void filter_page() throws InterruptedException {
@@ -1116,7 +1115,7 @@ public class ZaskFilters {
 		assertTrue(tags_lists);
 		Thread.sleep(2000);
 	}
-	@Ignore
+	
 	////--------without categories,status and privilege filter-------////
 	@Test
 	public void clearing_number_of_questions_filter() throws InterruptedException {
@@ -1708,7 +1707,7 @@ public class ZaskFilters {
 		assertEquals(users_link,driver.getCurrentUrl());
 		Thread.sleep(1000);
 	}
-	@Ignore
+	
 	////--------------------Filter button categories------------------////
 	@Test
 	public void users_categories_filter() throws InterruptedException {
